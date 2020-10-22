@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<!-- <html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Blog Site</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <h3>Blog Post Form</h3>
+    <p>Thank you for your submission!</p>
+    <h4>Blog Post:</h4>
+    <p th:text="${title}" />
+    <p th:text="${author}" />
+    <p th:text="${blogEntry}" />
+  </body>
+</html> -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Site</title>
+</head>
+<body>
+    <h1>Welcome to our blog site</h1>
+    <h3>Check out our blog posts</h3>
+
+    <p>Please use the form below to submit a blog post</p>
+    <form action="#" th:action="@{/}" th:object="${blogPost}" method="post" >
+        <table>
+            <tr>
+                <td>Title</td>
+                <td><input type="text" th:field="*{title}" ></td>
+            </tr>
+            <tr>
+                <td>Author</td>
+                <td><input type="text" th:field="*{author}" ></td>
+            </tr>
+            <tr>
+                <td>Blog Entry</td>
+                <td><input type="text" th:field="*{blogEntry}" ></td>
+            </tr>
+            <tr>
+                <td><button type="submit">Submit Your Post</button></td>
+            </tr>
+        </table>
+    
+    </form>
+</body>
+</html>
