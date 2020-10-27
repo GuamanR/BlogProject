@@ -1,48 +1,62 @@
 <!DOCTYPE html>
-<html lang="en"></html>
-<!-- <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Blog Site</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
-  <body>
-    <h3>Blog Post Form</h3>
-    <p>Thank you for your submission!</p>
-    <h4>Blog Post:</h4>
-    <p th:text="${title}" />
-    <p th:text="${author}" />
-    <p th:text="${blogEntry}" />
-  </body>
-</html> -->
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="CSS/standard.css">
     <title>Blog Post Site</title>
 </head>
 <body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type= "button" class=" navbar-toggle collapsed" 
+                data-toggle="collapse" 
+                data-target="#bs-example-navbar-collapse-1"
+                aria-expanded=" false" >
+            <span class= "sr-only">Toggle Navigation</span>
+            <span class= "icon-bar"></span>
+            <span class= "sr-only"></span>
+            <span class= "sr-only"></span>
+            <a href="#" class="navbar-brand">Brand</a>
+        </button>
+            </div>
+        </div>
+    </nav>
+<div class="container">
     <h1>Welcome to our blog site</h1>
     <h3>Check out our blog posts</h3>
-
-    <p>Please use the form below to submit a blog post</p>
-    <form action="#" th:action="@{/}" th:object="${blogPost}" method="post" >
-        <table>
-            <tr>
-                <td>Title</td>
-                <td><input type="text" th:field="*{title}" ></td>
-            </tr>
-            <tr>
-                <td>Author</td>
-                <td><input type="text" th:field="*{author}" ></td>
-            </tr>
-            <tr>
-                <td>Blog Entry</td>
-                <td><input type="text" th:field="*{blogEntry}" ></td>
-            </tr>
-            <tr>
-                <td><button type="submit">Submit Your Post</button></td>
-            </tr>
-        </table>
     
-    </form>
+    <div class="row d-flex justify-content-around">
+            <div th:each = "blog:${posts}">
+                <div class="card col-md-6 p-0 mb-3" style="min-width: 18rem">
+                <h4 class="card-header" th:text="${blog.title}"></h4>
+                    <div class="card-body">
+                    <p class="card-text" th:text="${blog.author}"/>
+                    <p class = "card-text" th:text="${blog.blogEntry}"/>
+                    </div>
+                    <div class="card-footer">
+                        <!-- This will have update,show or delete functions for the blog post -->
+                        <form action="#" th:action= " @{/blogpost/{id}(id=${blog.id})}" th:method="delete">
+                            <div class="form-group">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button type = "submit" class="btn btn-danger btn-block " th:text= "delete">Delete</button>
+                            </div>
+                        
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <a th:href="@{/blogpost/new}">
+            <button class="btn btn-primary">Create a New Post Here</button>
+        </a>
+</div>
+        
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>
